@@ -10,7 +10,7 @@ class FormSender
      * @throws Exception
      */
     public function validateArray($postArray = []) {
-        if (isset($postArray['email']) && isset($postArray['URL'])) {
+        if (! isset($postArray['email']) && ! isset($postArray['URL'])) {
             $this->err['fatality'] = 'Missing Email or URL fields';
             return;
         }
