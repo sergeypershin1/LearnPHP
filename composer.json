@@ -1,4 +1,11 @@
 {
+  "name": "sergeypershin/form",
+  "description": "Rebpm test",
+  "autoload": {
+    "psr-4": {
+      "Sergeypershin\\Form\\": "src"
+    }
+  },
   "require": {
     "phpunit/phpunit" : "^8.5"
   }

@@ -1,4 +1,5 @@
 <?php
+namespace Sergeypershin\Form;
 
 class FormSender
 {
@@ -23,6 +24,7 @@ class FormSender
             $this->err['URL'] = 'Invalid URL! Please, check URL.';
         }
     }
+
     public function sendMail($to = '', $subject = '', $message = '', $headers = []) {
         mail($to, $subject, $message, $headers);
     }
@@ -30,9 +32,4 @@ class FormSender
         return $this->err;
     }
 }
-$form_sender = new FormSender();
-$form_sender->validateArray($_POST);
-$arrayErr = $form_sender->getErr();
-if (empty($arrayErr)) {
-    $form_sender->sendMail($_POST['email'], $_POST['subject'], $_POST['message'], $_POST['headers']);
-}
+
