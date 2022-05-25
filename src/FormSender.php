@@ -3,17 +3,16 @@ namespace Sergeypershin\Form;
 
 class FormSender
 {
-    protected $err = [];
+    protected $err = []; //errrors
+
     /**
-     * @var string
+     * @param array $postArray
+     * @return bool
      */
-    /**
-     * @throws Exception
-     */
-    public function validateArray($postArray = []) {
+    public function validateArray(array $postArray = []) : bool {
         if (! isset($postArray['email']) && ! isset($postArray['URL'])) {
             $this->err['fatality'] = 'Missing Email or URL fields';
-            return;
+            return false;
         }
         $dataEmail = $postArray['email'];
         $dataUrl = $postArray['URL'];
@@ -25,7 +24,20 @@ class FormSender
         }
     }
 
-    public function sendMail($to = '', $subject = '', $message = '', $headers = []) {
+    /**
+     * @param array $postArray
+     * @return false
+     */
+    public function execute(array $postArray = []){
+        if($this->validateArray($postArray)){
+            //return $this->sendMail();
+        }
+        return false;
+    }
+
+    private function sendMail($to = '', $subject = '', $message = '', $headers = []) : bool {
+        //нет проверки try
+        // Отправить $message на русском языке UTF-8
         mail($to, $subject, $message, $headers);
     }
     public function getErr() {
