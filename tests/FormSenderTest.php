@@ -2,9 +2,12 @@
 use PHPUnit\Framework\TestCase;
 use Sergeypershin\Form\FormSender;
 
-class FormSenderTest extends TestCase{
+class FormSenderTest extends TestCase
+{
 
-    public function testValidate(){
+    public function testValidate()
+    {
+        $mock = $this->creatMock(FormSender::class);
         $post = [];
         $form_sender = new FormSender();
         $result = $form_sender->validateArray($post);
