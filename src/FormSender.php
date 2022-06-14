@@ -41,7 +41,7 @@ class FormSender
         return false;
     }
 
-    public function sendMail($to, $message, $subject = '', $headers = []) : bool
+    public function sendMail($to, $subject, $message = '', $headers = []) : bool
     {
         //нет проверки try
         // Отправить $message на русском языке UTF-8
@@ -57,7 +57,7 @@ class FormSender
         $message = utf8_encode($message);
 
         try {
-            if (! mail($to, $message, $subject, $headers)) {
+            if (! mail($to, $subject, $message, $headers)) {
                 $this->errors[] = "Send error!";
                 return false;
             }
