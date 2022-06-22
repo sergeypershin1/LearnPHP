@@ -14,24 +14,31 @@ class FormSenderTest extends TestCase
             'https://test.ru',
         ];
         $result = $form_sender->validateArray($post);
+        $this->assertEquals($result, true);
 
         $post = [
             'test@test.test',
             'test.ru',
         ];
         $result = $form_sender->validateArray($post);
+        $this->assertEquals($result, false);
 
         $post = [
-            'email@email.co',
+            '@test.test',
+            'https://test.ru',
+        ];
+        $result = $form_sender->validateArray($post);
+        $this->assertEquals($result, false);
+
+        $post = [
+            '@test.test',
             'test.ru',
         ];
         $result = $form_sender->validateArray($post);
-
         $this->assertEquals($result, false);
 
-        $arrayErr = $form_sender->getErrors();
-        if (empty($arrayErr)) {
-            $form_sender->sendMail($_POST['email'], $_POST['subject'], $_POST['message'], $_POST['headers']);
-        }
+        $mock = $this->createMock(FormSender::class);
+        $result = $mock->method('sendMail')->willReturn(true);
+        $this->assertEquals($result, true);
     }
 }
